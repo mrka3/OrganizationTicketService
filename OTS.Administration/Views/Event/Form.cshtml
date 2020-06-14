@@ -1,0 +1,53 @@
+﻿@model OTS.Administration.Models.Events.CreateEdit.EventEditModel
+
+@if (Model.Id.HasValue)
+{
+    <h1 class="h3 mb-3 font-weight-normal">Редактирование @Model.Form.Title</h1>
+}
+else
+{
+    <h1 class="h3 mb-3 font-weight-normal">Создание нового мероприятия</h1>
+}
+
+@using (Html.BeginForm(Model.Id.HasValue ? "Edit" : "Create", "Event", FormMethod.Post))
+{
+<div class="form-group">
+    <label>Наименование <span style="color:red" asp-validation-for="Form.Title"></span></label>
+    <input type="text" asp-for="Form.Title" class="form-control" />
+</div>
+<div class="form-group">
+    <label>Описание <span style="color:red" asp-validation-for="Form.Description"></span></label>
+    <textarea type="text" asp-for="Form.Description" class="form-control"></textarea>
+</div>
+<div class="form-row">
+    <div class="col">
+        <label>Количество билетов <span style="color:red" asp-validation-for="Form.TicketCount"></span></label>
+        <input type="number" asp-for="Form.TicketCount" class="form-control" />
+    </div>
+    <div class="col">
+        <label>Продолжительность (мин.) <span style="color:red" asp-validation-for="Form.Duration"></span></label>
+        <input type="number" asp-for="Form.Duration" class="form-control" />
+    </div>
+</div>
+<div class="form-group">
+    <label>Дата проведения <span style="color:red" asp-validation-for="Form.IssueDate"></span></label>
+    <input type="text" asp-for="Form.IssueDate" class="form-control" id="date-mask" placeholder="__/__/____ __:__" />
+</div>
+<div class="form-row">
+    <div class="col">
+        <button class="btn btn-lg btn-success btn-block" type="submit">Сохранить</button>
+    </div>
+    <div class="col">
+        <a class="btn btn-lg btn-primary btn-block" asp-action="List" asp-controller="Event">Назад к списку</a>
+    </div>
+</div>
+}
+
+
+
+
+<script>
+    $(document).ready(function ($) {
+        $('#date-mask').mask("00/00/0000 00:00");
+    });
+</script>

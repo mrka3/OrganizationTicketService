@@ -1,0 +1,37 @@
+﻿@model OTS.Administration.Models.Auth.RegisterModel
+
+@{
+    Layout = "_SignInLayout";
+}
+
+
+<head>
+    <title>Регистрация</title>
+    <link href="~/css/signin.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+    <form class="form-signin" asp-action="Register" asp-controller="Account" asp-anti-forgery="true">
+        <svg class="bi bi-calendar3" width="72" height="72" viewBox="0 0 16 16" fill="blue" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+        </svg>
+        <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+        <input style="margin-bottom: 10px" type="text" asp-for="Name" class="form-control" placeholder="Введите имя" required autofocus />
+        <span asp-validation-for="Name"></span>
+        <input style="margin-bottom: 10px" type="text" asp-for="Surname" class="form-control" placeholder="Введите фамилию" required autofocus />
+        <span asp-validation-for="Surname"></span>
+        <input style="margin-bottom: 10px" type="text" asp-for="Email" class="form-control" placeholder="Введите электронную почту" required autofocus />
+        <span asp-validation-for="Email"></span>
+        <input style="margin-bottom: 10px" type="text" asp-for="Login" class="form-control" placeholder="Введите логин" required autofocus />
+        <span asp-validation-for="Login"></span>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Введите пароль" required />
+        <span asp-validation-for="Password"></span>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Повторите пароль" required />
+        <span asp-validation-for="ConfirmPassword"></span>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
+        <a class="btn btn-lg btn-primary btn-block" asp-action="Login" asp-controller="Account">Назад</a>
+        <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+    </form>
+
+
+</body>
