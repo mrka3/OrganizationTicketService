@@ -4,6 +4,6 @@ namespace OTS.Administration.Models.Events.Item
 {
     public interface IEventModelBuilder
     {
-        EventModel Build(Guid id);
+        EventModel Build(Guid id, Guid userId);
     }
 }

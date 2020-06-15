@@ -9,6 +9,7 @@ namespace OTS.Administration.Models.Events.CreateEdit
         public string IssueDate { get; set; }
         public int TicketCount { get; set; }
         public int Duration { get; set; }
+        public int TicketCost { get; set; }
 
         public EventForm()
         {

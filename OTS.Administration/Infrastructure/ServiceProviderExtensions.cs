@@ -4,6 +4,7 @@ using OTS.Administration.Models.Auth;
 using OTS.Administration.Models.Events.CreateEdit;
 using OTS.Administration.Models.Events.Item;
 using OTS.Administration.Models.Events.List;
+using OTS.Administration.Models.Tickets.Purchase;
 using OTS.DataLayer;
 using OTS.DataLayer.Entities;
 using OTS.DataLayer.Entities.Events;
@@ -33,6 +34,9 @@ namespace OTS.Administration.Infrastructure
             services.AddTransient<IEventFormHandler, EventFormHandler>();
             services.AddTransient<IEventEditModelBuilder, EventEditModelBuilder>();
 
+            services.AddTransient<ITicketHandler, TicketHandler>();
+
+            services.AddTransient<IProfileModelBuilder, ProfileModelBuilder>();
 
             services.AddSingleton<IEntityRepository<IOtsEntity>, EntityRepository<IOtsEntity>>();
             services.AddTransient<OtsDbContext>();

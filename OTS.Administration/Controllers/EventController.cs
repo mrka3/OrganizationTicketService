@@ -34,7 +34,9 @@ namespace OTS.Administration.Controllers
 
         public IActionResult Item(Guid id)
         {
-            return View("Item", eventModelBuilder.Build(id));
+            if(!Guid.TryParse(User.Identity.Name, out var userId)) throw new Exception("У вас нет доступа");
+
+            return View("Item", eventModelBuilder.Build(id, userId));
         }
 
         public IActionResult Create()

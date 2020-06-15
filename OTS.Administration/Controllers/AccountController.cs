@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -11,10 +12,11 @@ namespace OTS.Administration.Controllers
     public class AccountController : Controller
     {
         private readonly ILoginModelHandler loginModelHandler;
-
-        public AccountController(ILoginModelHandler loginModelHandler)
+        private readonly IProfileModelBuilder profileModelBuilder;
+        public AccountController(ILoginModelHandler loginModelHandler, IProfileModelBuilder profileModelBuilder)
         {
             this.loginModelHandler = loginModelHandler;
+            this.profileModelBuilder = profileModelBuilder;
         }
 
         [HttpGet]
@@ -74,6 +76,24 @@ namespace OTS.Administration.Controllers
             return View(model);
         }
 
+        public IActionResult Profile()
+        {
+            if (!Guid.TryParse(User.Identity.Name, out var userId)) throw new Exception("Нет доступа");
+
+            return View(profileModelBuilder.Build(userId));
+        }
+        [HttpPost]
+        public IActionResult Profile(ProfileModel model)
+        {
+            if(!Guid.TryParse(User.Identity.Name, out var userId)) throw new Exception("Нет доступа");
+
+            if (!ModelState.IsValid) return View(model);
+
+            loginModelHandler.Edit(userId, model);
+
+            return View(model);
+        }
+
         private async Task Authenticate(string userName)
         {
             // создаем один claim
@@ -92,5 +112,7 @@ namespace OTS.Administration.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account");
         }
+
+
     }
 }

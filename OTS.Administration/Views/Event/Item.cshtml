@@ -29,6 +29,10 @@
             <label>Продолжительность (мин.)</label>
             <input type="number" asp-for="Duration" class="form-control" readonly/>
         </div>
+        <div class="col">
+            <label>Цена билета (руб.)</label>
+            <input type="number" asp-for="TicketCost" class="form-control" readonly/>
+        </div>
     </div>
     <div class="form-group">
         <label>Дата проведения</label>
@@ -38,6 +42,12 @@
     <div class="form-row">
         <div class="col">
             <a class="btn btn-lg btn-primary btn-block" asp-action="Edit" asp-controller="Event" asp-route-id="@Model.Id">Редактировать</a>
+        </div>
+        <div class="col">
+            @{
+                var disabledRazor = Model.CanBuyTicket ? "" : "disabled";
+            }
+            <button type="button" class="btn btn-lg btn-info btn-block" data-toggle="modal" data-target="#staticBackdrop" @disabledRazor>Взять билет</button>
         </div>
         <div class="col">
             <a class="btn btn-lg btn-primary btn-block" asp-action="List" asp-controller="Event">Назад</a>
@@ -64,3 +74,27 @@
         </tbody>
     </table>
 </div>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Подтверждение операции</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Мероприятие: @Model.Title</p>
+                <p>Цена: @Model.TicketCost</p>
+                <p>Дата проведения: @Model.IssueDate</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Отменить</button>
+                <a type="button" class="btn btn-success" asp-action="GetTicket" asp-controller="Ticket" asp-route-eventId="@Model.Id">Подтвердить</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,23 @@
+﻿@model OTS.Administration.Models.Auth.ProfileModel
+
+<form asp-action="Profile" asp-controller="Account">
+    <div class="form-group">
+        <label>Логин <span style="color:red" asp-validation-for="Login"></span></label>
+        <input type="text" asp-for="Login" class="form-control" readonly="readonly" />
+    </div>
+    <div class="form-group">
+        <label>Имя<span style="color:red" asp-validation-for="Name"></span></label>
+        <input type="text" asp-for="Name" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Фамилия<span style="color:red" asp-validation-for="Surname"></span></label>
+        <input type="text" asp-for="Surname" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Электронная почта <span style="color:red" asp-validation-for="Email"></span></label>
+        <input type="text" asp-for="Email" class="form-control"/>
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-primary" >Сохранить</button>
+</form>
+

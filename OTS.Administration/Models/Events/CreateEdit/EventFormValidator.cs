@@ -62,6 +62,11 @@ namespace OTS.Administration.Models.Events.CreateEdit
             {
                 model.AddModelError("Form.Duration", "Значение должно быть больше нуля");
             }
+
+            if (form.TicketCost < 0)
+            {
+                model.AddModelError("Form.TicketCost", "Значение должно быть больше нуля");
+            }
         }
     }
 }

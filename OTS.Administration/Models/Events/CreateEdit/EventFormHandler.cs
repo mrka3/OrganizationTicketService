@@ -18,7 +18,7 @@ namespace OTS.Administration.Models.Events.CreateEdit
 
         public Guid HandleCreate(EventForm form)
         {
-            var newEvent = eventFactory.Create(form.Title, form.Description, form.TicketCount, form.Duration,
+            var newEvent = eventFactory.Create(form.Title, form.Description, form.TicketCount, form.Duration, form.TicketCost,
                 form.IssueDate);
 
             entityRepository.InsertOnSave(newEvent);
@@ -34,6 +34,7 @@ namespace OTS.Administration.Models.Events.CreateEdit
             valResult.Event.Duration = form.Duration;
             valResult.Event.IssueDate = form.IssueDate;
             valResult.Event.TicketCount = form.TicketCount;
+            valResult.Event.TicketCost = form.TicketCost;
 
             entityRepository.SaveChanges();
         }

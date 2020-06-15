@@ -23,5 +23,10 @@ namespace OTS.DataLayer.Entities.Users
         {
             return entityRepository.GetTable<UserEventLink>().Where(ue => ue.EventId == id).ToList();
         }
+
+        public bool IsExist(Guid userId, Guid eventId)
+        {
+            return entityRepository.GetTable<UserEventLink>().Any(ue => ue.EventId == eventId && ue.UserId == userId);
+        }
     }
 }

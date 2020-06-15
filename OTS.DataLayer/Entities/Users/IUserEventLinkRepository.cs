@@ -7,5 +7,6 @@ namespace OTS.DataLayer.Entities.Users
     {
         IList<UserEventLink> AllByUserId(Guid id);
         IList<UserEventLink> AllByEventId(Guid id);
+        bool IsExist(Guid userId, Guid eventId);
     }
 }

@@ -28,6 +28,10 @@ else
         <label>Продолжительность (мин.) <span style="color:red" asp-validation-for="Form.Duration"></span></label>
         <input type="number" asp-for="Form.Duration" class="form-control" />
     </div>
+    <div class="col">
+        <label>Цена билета (руб.) <span style="color:red" asp-validation-for="Form.TicketCost"></span></label>
+        <input type="number" asp-for="Form.TicketCost" class="form-control" />
+    </div>
 </div>
 <div class="form-group">
     <label>Дата проведения <span style="color:red" asp-validation-for="Form.IssueDate"></span></label>

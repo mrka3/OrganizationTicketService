@@ -19,11 +19,13 @@ namespace OTS.Administration.Models.Events.Item
             this.userEventLinkRepository = userEventLinkRepository;
         }
 
-        public EventModel Build(Guid id)
+        public EventModel Build(Guid id, Guid userId)
         {
             var eventModel = eventRepository.Find(id);
 
             if (eventModel == null) throw new Exception("Мероприятие не найдено");
+
+            if (!DateTime.TryParse(eventModel.IssueDate, out var date)) throw new Exception("Неизвестная ошибка");
 
             var userIds = userEventLinkRepository.AllByEventId(id).Select(ue => ue.UserId).ToList();
 
@@ -34,7 +36,10 @@ namespace OTS.Administration.Models.Events.Item
 
             var ticketCount = eventModel.TicketCount - userIds.Count;
 
-            return new EventModel(id, eventModel.Title, eventModel.Description, eventModel.IssueDate, ticketCount, eventModel.Duration, visitors);
+            var canBuy = userIds.Contains(userId) || (eventModel.TicketCount == userIds.Count) || (date < DateTime.Now);
+
+            return new EventModel(id, eventModel.Title, eventModel.Description, eventModel.IssueDate, ticketCount, eventModel.Duration, eventModel.TicketCost, visitors, !canBuy);
         }
+
     }
 }

@@ -11,6 +11,7 @@ namespace OTS.DataLayer.Entities.Events
         public string Description { get; set; }
         public int TicketCount { get; set; }
         public int Duration { get; set; }
+        public int TicketCost { get; set; }
         public string IssueDate { get; set; }
 
     }

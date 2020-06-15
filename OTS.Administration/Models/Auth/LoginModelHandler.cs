@@ -28,6 +28,20 @@ namespace OTS.Administration.Models.Auth
             return user.Id;
         }
 
+        public void Edit(Guid id, ProfileModel form)
+        {
+            var user = userRepository.Find(id);
+
+            if(user == null) throw new Exception("Пользователя не существует");
+
+            user.Email = form.Email;
+            user.Name = form.Name;
+            user.Surname = form.Surname;
+
+
+            entityRepository.SaveChanges();
+        }
+
         public bool IsPasswordValid(LoginModel form)
         {
             var user = userRepository.FindByLogin(form.Login);
