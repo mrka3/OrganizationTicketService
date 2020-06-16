@@ -62,5 +62,14 @@ namespace OTS.Administration.Models.Auth
         {
             return userRepository.IsExist(login);
         }
+
+        public bool IsAdmin(Guid userId)
+        {
+            var user = userRepository.Find(userId);
+
+            if(user == null) throw new Exception("Пользователь не найден");
+
+            return user.IsAdmin;
+        }
     }
 }

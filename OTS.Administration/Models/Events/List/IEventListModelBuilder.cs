@@ -2,6 +2,6 @@
 {
     public interface IEventListModelBuilder
     {
-        EventListModel Build();
+        EventListModel Build(bool isAdmin);
     }
 }

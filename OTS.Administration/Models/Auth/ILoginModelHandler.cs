@@ -9,5 +9,6 @@ namespace OTS.Administration.Models.Auth
         bool IsPasswordValid(LoginModel form);
         Guid? GetUserId(string login);
         bool IsExist(string login);
+        bool IsAdmin(Guid userId);
     }
 }

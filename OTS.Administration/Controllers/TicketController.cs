@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OTS.Administration.Models.Tickets.Purchase;
@@ -22,7 +24,16 @@ namespace OTS.Administration.Controllers
 
             ticketHandler.HandlePurchase(eventId, userId);
 
-            return RedirectToAction("Item", "Event", new {id = eventId});
+            return RedirectToAction("ItemService", "Event", new {id = eventId});
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var image = System.IO.File.OpenRead(Path.Combine(AppDomain.CurrentDomain.BaseDirectory ?? string.Empty, "Content", "qr-code.gif"));
+            return File(image, "image/jpeg");
+        }
+
     }
 }

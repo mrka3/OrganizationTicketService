@@ -1,21 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using OTS.Administration.Models;
+using OTS.Administration.Models.Auth;
 
 namespace OTS.Administration.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILoginModelHandler loginModelHandler;
+
+        public HomeController(ILoginModelHandler loginModelHandler)
+        {
+            this.loginModelHandler = loginModelHandler;
+        }
+
         [Authorize]
         public IActionResult Index()
         {
-            return RedirectToAction("List", "Event");
+            if(!Guid.TryParse(User.Identity.Name, out var userId)) throw new Exception("Нет доступа");
+
+            if (loginModelHandler.IsAdmin(userId))
+                return View();
+
+            return RedirectToAction("ListService", "Event");
         }
     }
 }

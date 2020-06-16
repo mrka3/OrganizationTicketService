@@ -6,10 +6,12 @@ namespace OTS.Administration.Models.Events.List
     public class EventListModel
     {
         public IList<EventListItemModel> Events { get; set; }
+        public bool IsAdmin { get; set; }
 
-        public EventListModel(IList<EventListItemModel> events)
+        public EventListModel(IList<EventListItemModel> events, bool isAdmin)
         {
             Events = events;
+            IsAdmin = isAdmin;
         }
     }
 }

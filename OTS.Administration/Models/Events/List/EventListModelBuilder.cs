@@ -12,11 +12,11 @@ namespace OTS.Administration.Models.Events.List
             this.eventRepository = eventRepository;
         }
 
-        public EventListModel Build()
+        public EventListModel Build(bool isAdmin)
         {
             var events = eventRepository.All();
 
-            return new EventListModel(events.Select(e => new EventListItemModel(){Id = e.Id, TicketCount = $"{e.TicketCount}", Title = e.Title}).ToList());
+            return new EventListModel(events.Select(e => new EventListItemModel(){Id = e.Id, TicketCount = $"{e.TicketCount}", Title = e.Title}).ToList(), isAdmin);
         }
     }
 }

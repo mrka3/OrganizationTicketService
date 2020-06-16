@@ -1,30 +1,47 @@
 ﻿@model OTS.Administration.Models.Events.List.EventListModel
 
+@{
+    Layout = Model.IsAdmin ? "_Layout" : "_ServiceLayout";
+}
+
 <style>
     th {
-        text-align: center; 
+        text-align: center;
     }
     td {
         text-align: center;
     }
+
+    @if (!Model.IsAdmin)
+    {
+        <text>
+    .admin {
+        display: none;
+    }
+        </text>
+    }
 </style>
+
+<h2>Список мероприятий</h2>
 
 <table class="table table-striped table-hover">
     <thead>
-    <tr>
-        <th>Мероприятие</th>
-        <th>Количество билетов</th>
-        <th><a type="button" class="btn btn-primary btn-sm btn-block" asp-action="Create" asp-controller="Event">Добавить</a></th>
-    </tr>
+        <tr>
+            <th>Мероприятие</th>
+            <th>Количество билетов</th>
+            <th><a type="button" class="btn btn-primary btn-sm btn-block admin" asp-action="Create" asp-controller="Event">Добавить</a></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.Events)
-    {
-        <tr>
-            <td>@item.Title</td>
-            <td>@item.TicketCount</td>
-            <td><a asp-action="Item" asp-controller="Event" asp-route-id="@item.Id">Подробнее...</a></td>
-        </tr>
-    }
+        @foreach (var item in Model.Events)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.TicketCount</td>
+                @{ var action = Model.IsAdmin ? "Item" : "ItemService"; }
+                <td><a asp-action="@action" asp-controller="Event" asp-route-id="@item.Id">Подробнее...</a></td>
+            </tr>
+        }
     </tbody>
 </table>
+

@@ -18,6 +18,11 @@ namespace OTS.DataLayer.Entities.Users
         {
             return entityRepository.GetTable<User>().FirstOrDefault(u => u.Id == id);
         }
+
+        public IList<User> All()
+        {
+            return entityRepository.GetTable<User>().ToList();
+        }
         public User FindByLogin(string login)
         {
             return entityRepository.GetTable<User>().FirstOrDefault(u => u.Login == login);

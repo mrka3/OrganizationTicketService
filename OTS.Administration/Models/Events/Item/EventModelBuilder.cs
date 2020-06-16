@@ -19,7 +19,7 @@ namespace OTS.Administration.Models.Events.Item
             this.userEventLinkRepository = userEventLinkRepository;
         }
 
-        public EventModel Build(Guid id, Guid userId)
+        public EventModel Build(Guid id, Guid userId, bool isAdmin)
         {
             var eventModel = eventRepository.Find(id);
 
@@ -38,7 +38,7 @@ namespace OTS.Administration.Models.Events.Item
 
             var canBuy = userIds.Contains(userId) || (eventModel.TicketCount == userIds.Count) || (date < DateTime.Now);
 
-            return new EventModel(id, eventModel.Title, eventModel.Description, eventModel.IssueDate, ticketCount, eventModel.Duration, eventModel.TicketCost, visitors, !canBuy);
+            return new EventModel(id, eventModel.Title, eventModel.Description, eventModel.IssueDate, ticketCount, eventModel.Duration, eventModel.TicketCost, visitors, !canBuy, isAdmin);
         }
 
     }

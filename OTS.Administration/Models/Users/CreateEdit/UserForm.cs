@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace OTS.Administration.Models.Auth
+namespace OTS.Administration.Models.Users.CreateEdit
 {
-    public class ProfileModel
+    public class UserForm
     {
         [Required(ErrorMessage = "Не указано имя")]
         public string Name { get; set; }
@@ -13,12 +12,7 @@ namespace OTS.Administration.Models.Auth
         public string Email { get; set; }
         [Required(ErrorMessage = "Не указан логин")]
         public string Login { get; set; }
-        
-        public IList<ProfileEventsModel> Events { get; set; }
+        public bool IsAdmin { get; set; }
 
-        public ProfileModel()
-        {
-            Events = new List<ProfileEventsModel>();
-        }
     }
 }

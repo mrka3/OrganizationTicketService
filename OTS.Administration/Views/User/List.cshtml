@@ -1,0 +1,23 @@
+﻿@model OTS.Administration.Models.Users.List.UserListModel
+
+<h2>Список пользователей</h2>
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Логин</th>
+        <th><a type="button" class="btn btn-primary btn-sm btn-block admin" asp-action="Create" asp-controller="User">Добавить</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Users)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Login</td>
+            <td><a asp-action="Edit" asp-controller="User" asp-route-id="@item.Id">Изменить</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

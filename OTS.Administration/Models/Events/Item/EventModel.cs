@@ -15,8 +15,9 @@ namespace OTS.Administration.Models.Events.Item
         public int TicketCost { get; set; }
         public IList<EventUsersModel> Visitors { get; set; }
         public bool CanBuyTicket { get; set; }
+        public bool IsAdmin { get; set; }
 
-        public EventModel(Guid id, string title, string description, string issueDate, int ticketCount, int duration, int ticketCost, IList<EventUsersModel> visitors, bool canBuyTicket)
+        public EventModel(Guid id, string title, string description, string issueDate, int ticketCount, int duration, int ticketCost, IList<EventUsersModel> visitors, bool canBuyTicket, bool isAdmin)
         {
             Id = id;
             Title = title;
@@ -27,6 +28,7 @@ namespace OTS.Administration.Models.Events.Item
             TicketCost = ticketCost;
             Visitors = visitors;
             CanBuyTicket = canBuyTicket;
+            IsAdmin = isAdmin;
         }
     }
 }

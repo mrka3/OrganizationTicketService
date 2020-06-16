@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OTS.Administration.Models.Auth;
 using OTS.Administration.Models.Events.CreateEdit;
 using OTS.Administration.Models.Events.Item;
 using OTS.Administration.Models.Events.List;
@@ -25,18 +26,32 @@ namespace OTS.Administration.Controllers
             this.eventEditModelBuilder = eventEditModelBuilder;
             this.eventFormValidator = eventFormValidator;
             this.eventFormHandler = eventFormHandler;
+
         }
 
         public IActionResult List()
         {
-            return View("List", eventListModelBuilder.Build());
+            return View("List", eventListModelBuilder.Build(true));
+        }
+        public IActionResult ListService()
+        {
+            return View("List", eventListModelBuilder.Build(false));
         }
 
         public IActionResult Item(Guid id)
         {
-            if(!Guid.TryParse(User.Identity.Name, out var userId)) throw new Exception("У вас нет доступа");
+            var userId = Guid.Parse(User.Identity.Name ?? string.Empty);
 
-            return View("Item", eventModelBuilder.Build(id, userId));
+
+            return View("Item", eventModelBuilder.Build(id, userId, true));
+        }
+
+        public IActionResult ItemService(Guid id)
+        {
+            var userId = Guid.Parse(User.Identity.Name ?? string.Empty);
+
+
+            return View("Item", eventModelBuilder.Build(id, userId, false));
         }
 
         public IActionResult Create()
